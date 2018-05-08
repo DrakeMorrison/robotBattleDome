@@ -16,10 +16,10 @@
           <input id='name1' type="text" placeholder='Fighter 1'>
           <div class="dropdown">
               <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Pick a Robot
+                Dropdown
                 <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu model-list" aria-labelledby="dropdownMenu1">
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
               </ul>
@@ -35,18 +35,20 @@
       <div class='jumbotron'>
           <h2>Corner 2</h2>
       <input id='name2' type="text" placeholder='Fighter 2'>
-      <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Pick a Robot
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu model-list" aria-labelledby="dropdownMenu1">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-          </ul>
-        </div>
+        <select name="" id="select2">
+          <option value="asmodeus">Asmodeus(snake)</option>
+          <option value="simon">Simon(snake)</option>
+          <option value="blue-boy">Blue Boy(drone)</option>
+          <option value="vox-amon">Vox Amon(drone)</option>
+          <option value="the-flamespeaker">The Flamespeaker(ATV)</option>
+          <option value="the-grinder">The Grinder(ATV)</option>
+        </select>
       </div>
     </div>
+
+    <div id='corner-1'></div>
+    <div id='corner-2'></div>
+
   </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
