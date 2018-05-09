@@ -1,3 +1,5 @@
+const data = require('./data.js');
+
 const robot = {
   name: '',
   hp: 0,
@@ -69,6 +71,7 @@ const buildBattleBot = (specObj) => {
 
   battleBot.model = specObj.model;
   battleBot.weapon = specObj.weapon;
+  data.setContestants(battleBot);
   return battleBot;
 };
 
@@ -78,6 +81,8 @@ const buildBotDomString = (botObj) => {
 
 const fight = () => {
   console.error('the fight began');
+  const fighters = data.getContestants();
+  console.error(fighters);
 };
 
 const randomNumber = (lowNum, highNum) => {
