@@ -1,60 +1,91 @@
 const robot = {
   name: '',
-  health: 0,
+  hp: 0,
   dmg: 0,
-  moveType: undefined,
+  type: undefined,
   weapon: undefined,
 };
 
 const drone = Object.create(robot);
-drone.moveType = 'flight';
+drone.type = 'drone';
+drone.moveType = 'flying';
 const snake = Object.create(robot);
+snake.type = 'snake';
 snake.moveType = 'slithering';
 const atv = Object.create(robot);
-atv.moveType = 'wheeled';
+atv.type = 'atv';
+atv.moveType = 'rolling';
 
-const buildRobots = (e) => {
-  console.error(e);
-  const id1 = $('#select1').val();
-  const id2 = $('#select2').val();
-  checkType(id1);
-  checkType(id2);
+const buildRobot1 = (e) => {
+  const battleBot = checkType(e.target.id);
+  battleBot.name = $('#name1').val();
+  const domString = buildBotDomString(battleBot);
+  $('#corner-1').html(domString);
+};
+
+const buildRobot2 = (e) => {
+  const battleBot = checkType(e.target.id);
+  battleBot.name = $('#name2').val();
+  const domString = buildBotDomString(battleBot);
+  $('#corner-2').html(domString);
 };
 
 const checkType = (typeId) => {
   switch (typeId) {
     case 'asmodeus':
-      buildSnake('asmodeus', 'acid venom');
-      break;
+      return buildBattleBot({model: 'asmodeus', weapon: 'acid venom', type: 'snake',});
     case 'simon':
-      buildSnake('simon', 'squeeze attack');
-      break;
+      return buildBattleBot({model: 'simon', weapon: 'squeeze attack', type: 'snake',});
     case 'blue-boy':
-      buildDrone('blue boy', 'Tazer');
-      break;
+      return buildBattleBot({model: 'blue boy', weapon: 'Tazer', type: 'drone',});
     case 'vox-amon':
-      buildDrone('vox amon', '');
-      break;
+      return buildBattleBot({model: 'vox amon', weapon: 'glue', type: 'drone',});
     case 'the-flamespeaker':
-      buildATV();
-      break;
+      return buildBattleBot({model: 'the flamespeaker', weapon: 'flame-thrower', type: 'atv',});
     case 'the-grinder':
-      buildATV();
-      break;
+      return buildBattleBot({model: 'the grinder', weapon: 'chainsaw and compactor', type: 'atv',});
   }
 };
 
-const buildSnake = () => {};
+const buildBattleBot = (specObj) => {
+  let battleBot = {};
+  if (specObj.type === 'snake') {
+    battleBot = Object.create(snake);
+    battleBot.dmg = randomNumber(50, 75);
+    battleBot.hp = randomNumber(50, 100);
+  } else if (specObj.type === 'drone') {
+    battleBot = Object.create(drone);
+    battleBot.dmg = randomNumber(75, 100);
+    battleBot.hp = randomNumber(1, 50);
+  } else if (specObj.type === 'atv') {
+    battleBot = Object.create(atv);
+    battleBot.dmg = randomNumber(25, 75);
+    battleBot.hp = randomNumber(50, 75);
+  } else {
+    battleBot = Object.create(robot);
+    battleBot.dmg = randomNumber(0, 100);
+    battleBot.hp = randomNumber(0, 100);
+  }
 
-const buildDrone = () => {};
+  battleBot.model = specObj.model;
+  battleBot.weapon = specObj.weapon;
+  return battleBot;
+};
 
-const buildATV = () => {};
+const buildBotDomString = (botObj) => {
+  console.error(botObj);
+};
 
 const fight = () => {
   console.error('the fight began');
 };
 
+const randomNumber = (lowNum, highNum) => {
+  return Math.floor(Math.random() * (highNum - lowNum + 1)) + lowNum;
+};
+
 module.exports = {
-  buildRobots,
+  buildRobot1,
+  buildRobot2,
   fight,
 };
