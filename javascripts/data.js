@@ -1,3 +1,4 @@
+'use strict';
 let contestants = [];
 
 const getContestants = () => {

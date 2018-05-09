@@ -1,3 +1,7 @@
 body {
   background-color: blue;
 }
+
+#hp1, #hp2 {
+  width: 100%;
+}
