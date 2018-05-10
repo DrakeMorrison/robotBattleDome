@@ -26,7 +26,7 @@
 ![Fight](https://github.com/DrakeMorrison/robotBattleDome/raw/master/screenshots/fighting.png)
 
 ### Victory!
-![Winner](https://github.com/DrakeMorrison/robotBattleDome/raw/master/screenshots/victory.pdf)
+![Winner](https://github.com/DrakeMorrison/robotBattleDome/raw/master/screenshots/victory.png)
 
 ### If there is a draw...
 ![Draw](https://github.com/DrakeMorrison/robotBattleDome/raw/master/screenshots/tie.png)
