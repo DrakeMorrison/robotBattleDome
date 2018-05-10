@@ -1,6 +1,7 @@
+'use strict';
 const buildRobot1 = require('./robots.js').buildRobot1;
 const buildRobot2 = require('./robots.js').buildRobot2;
-const fight = require('./robots.js').fight;
+const fight = require('./fight.js');
 
 const addEvents = () => {
   $('#fight-btn').on('click', fight);
