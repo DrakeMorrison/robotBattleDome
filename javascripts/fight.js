@@ -1,36 +1,64 @@
 'use strict';
 const data = require('./data.js');
-const tieObj = {};
 
 const fight = () => {
   const fighters = data.getContestants();
   if (fighters.length < 2) {
     alert('There are not enough contestants!');
   } else {
-    console.error(fighters);
-    const newHP1 = fighters[0].hp - fighters[1].dmg;
-    const newHP2 = fighters[1].hp - fighters[0].dmg;
-    console.error(newHP1, newHP2);
-    if (newHP1 < 0 && newHP2 < 0) {
-      buildResult(tieObj);
-    } else if (newHP1 < 0) {
-      buildResult(fighters[1]);
-    } else if (newHP2 < 0) {
-      buildResult(fighters[0]);
+    let newHP1 = fighters[0].hp - fighters[1].dmg;
+    let newHP2 = fighters[1].hp - fighters[0].dmg;
+    newHP1 = newHP1 < 0 ? 0 : newHP1;
+    newHP2 = newHP2 < 0 ? 0 : newHP2;
+    if (newHP1 <= 0 && newHP2 <= 0) {
+      fighters[0].tie = true;
+      buildResult(fighters[0], fighters[1]);
+    } else if (newHP1 <= 0) {
+      buildResult(fighters[1], fighters[0]);
+    } else if (newHP2 <= 0) {
+      buildResult(fighters[0], fighters[1]);
     }
-
     const percentHealth1 = (newHP1 / fighters[0].hp) * 100;
     const percentHealth2 = (newHP2 / fighters[1].hp) * 100;
     $('#hp1').width(percentHealth1 + '%');
     $('#hp2').width(percentHealth2 + '%');
     fighters[0].hp = newHP1;
     fighters[1].hp = newHP2;
-    data.setContestants(fighters[0]);
-    data.setContestants(fighters[1]);
-    console.error(fighters);
+    data.setContestant1(fighters[0]);
+    data.setContestant2(fighters[1]);
   }
 };
 
-const buildResult = () => {};
+const buildResult = (winObj, losObj) => {
+  let message = '';
+  if (winObj.tie) {
+    message = `It was a draw! ${winObj.name} and ${losObj.name} defeated each other simultaneously!`;
+    winObj.name = 'Nobody';
+    winObj.hp = 0;
+    winObj.dmg = 0;
+    winObj.weapon = 'none';
+    winObj.model = 'none';
+    winObj.type = 'none';
+  } else {
+    message = `${winObj.name} the ${winObj.model} defeated ${losObj.name} the ${losObj.model} with its ${winObj.weapon}`;
+  }
+  let domString = '';
+  domString += `<div id='ex-panel' class="panel panel-success">`;
+  domString += `<div class="panel-heading">`;
+  domString += `<h3 class="panel-title">We Have a Winner!</h3>`;
+  domString += `</div>`;
+  domString += `<div class="panel-body">`;
+  domString += `<h1 class='text-capitalize'>The Winner is ${winObj.name}!</h1>`;
+  domString += `<h1 class='text-capitalize'>${message}</h1>`;
+  domString += `<h2>HP: ${winObj.hp}</h2>`;
+  domString += `<h2 class='text-capitalize'>Weapon: ${winObj.weapon}</h2>`;
+  domString += `<h2>Damage: ${winObj.dmg}</h2>`;
+  domString += `<h2 class='text-capitalize'>Model: ${winObj.model}</h2>`;
+  domString += `<h2 class='text-capitalize'>Type: ${winObj.type}</h2>`;
+  domString += `</div>`;
+  domString += `</div>`;
+
+  $('#winner-stage').html(domString);
+};
 
 module.exports = fight;

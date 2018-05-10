@@ -16,7 +16,7 @@ const snake = Object.create(robot);
 snake.type = 'snake';
 snake.moveType = 'slithering';
 const atv = Object.create(robot);
-atv.type = 'atv';
+atv.type = 'ATV';
 atv.moveType = 'rolling';
 
 const buildRobot1 = (e) => {
@@ -25,6 +25,7 @@ const buildRobot1 = (e) => {
   battleBot.cornerNum = 1;
   const domString = buildBotDomString(battleBot);
   $('#corner-1').html(domString);
+  data.setContestant1(battleBot);
 };
 
 const buildRobot2 = (e) => {
@@ -33,6 +34,7 @@ const buildRobot2 = (e) => {
   battleBot.cornerNum = 2;
   const domString = buildBotDomString(battleBot);
   $('#corner-2').html(domString);
+  data.setContestant2(battleBot);
 };
 
 const checkType = (typeId) => {
@@ -46,9 +48,9 @@ const checkType = (typeId) => {
     case 'vox-amon':
       return buildBattleBot({model: 'vox amon', weapon: 'glue', type: 'drone',});
     case 'the-flamespeaker':
-      return buildBattleBot({model: 'the flamespeaker', weapon: 'flame-thrower', type: 'atv',});
+      return buildBattleBot({model: 'flamespeaker', weapon: 'flame-thrower', type: 'ATV',});
     case 'the-grinder':
-      return buildBattleBot({model: 'the grinder', weapon: 'chainsaw and compactor', type: 'atv',});
+      return buildBattleBot({model: 'grinder', weapon: 'chainsaw and compactor', type: 'ATV',});
   }
 };
 
@@ -56,30 +58,24 @@ const buildBattleBot = (specObj) => {
   let battleBot = {};
   if (specObj.type === 'snake') {
     battleBot = Object.create(snake);
-    battleBot.dmg = randomNumber(50, 75);
+    battleBot.dmg = randomNumber(1, 25);
     battleBot.hp = randomNumber(75, 100);
   } else if (specObj.type === 'drone') {
     battleBot = Object.create(drone);
     battleBot.dmg = randomNumber(75, 100);
-    battleBot.hp = randomNumber(75, 100);
-  } else if (specObj.type === 'atv') {
+    battleBot.hp = randomNumber(1, 25);
+  } else if (specObj.type === 'ATV') {
     battleBot = Object.create(atv);
-    battleBot.dmg = randomNumber(25, 75);
-    battleBot.hp = randomNumber(75, 100);
-  } else {
-    battleBot = Object.create(robot);
-    battleBot.dmg = randomNumber(0, 100);
-    battleBot.hp = randomNumber(75, 100);
+    battleBot.dmg = randomNumber(25, 50);
+    battleBot.hp = randomNumber(50, 75);
   }
 
   battleBot.model = specObj.model;
   battleBot.weapon = specObj.weapon;
-  data.setContestants(battleBot);
   return battleBot;
 };
 
 const buildBotDomString = (botObj) => {
-  console.error(botObj);
   let domString = '';
   domString += `<div id='ex-panel' class="panel panel-danger">`;
   domString += `<div class="panel-heading">`;

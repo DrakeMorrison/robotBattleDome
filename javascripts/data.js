@@ -1,16 +1,20 @@
 'use strict';
-let contestants = [];
+const contestants = [];
 
 const getContestants = () => {
   return contestants;
 };
 
-const setContestants = (botObj) => {
-  contestants.unshift(botObj);
-  contestants = contestants.slice(0, 2);
+const setContestant1 = (botObj) => {
+  contestants[0] = botObj;
+};
+
+const setContestant2 = (botObj) => {
+  contestants[1] = botObj;
 };
 
 module.exports = {
   getContestants,
-  setContestants,
+  setContestant1,
+  setContestant2,
 };
