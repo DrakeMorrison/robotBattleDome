@@ -3,7 +3,7 @@ const data = require('./data.js');
 
 const fight = () => {
   const fighters = data.getContestants();
-  if (fighters.length < 2) {
+  if (fighters.length < 2 || fighters[0] === undefined) {
     alert('There are not enough contestants!');
   } else {
     let newHP1 = fighters[0].hp - fighters[1].dmg;
