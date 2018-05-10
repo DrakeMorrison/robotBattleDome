@@ -18,14 +18,23 @@ const fight = () => {
     } else if (newHP2 <= 0) {
       buildResult(fighters[0], fighters[1]);
     }
-    const percentHealth1 = (newHP1 / fighters[0].hp) * 100;
-    const percentHealth2 = (newHP2 / fighters[1].hp) * 100;
+
+    const percentHealth1 = getPercentage(newHP1, fighters[0].hp);
+    const percentHealth2 = getPercentage(newHP2, fighters[1].hp);
     $('#hp1').width(percentHealth1 + '%');
     $('#hp2').width(percentHealth2 + '%');
     fighters[0].hp = newHP1;
     fighters[1].hp = newHP2;
     data.setContestant1(fighters[0]);
     data.setContestant2(fighters[1]);
+  }
+};
+
+const getPercentage = (newHP, oldHP) => {
+  if (oldHP > 0) {
+    return (newHP / oldHP) * 100;
+  } else {
+    return 0;
   }
 };
 
